@@ -1,10 +1,5 @@
 package main;
 
-import java.util.List;
-import java.util.zip.CRC32;
-
-import javax.jws.Oneway;
-
 import thymio.Thymio;
 
 public class MainController {
@@ -30,35 +25,40 @@ public class MainController {
 		 * für das Auführen jeweils ein Programm "auskommentieren"
 		 */
 
-		/* Aufgabe 1 (Abstand halten!)
+		/*
+		 * Aufgabe 1 (Abstand halten!)
+		 */
 
-		
 		boolean isRunning = true;
 		short turnSpeed = 250;
 		short cruiseSpeed = 200;
+
+		// Objekte nah am Sensor -> hoher Wert, Objekte weiter weg -> kleiner
+		// Wert
+		// (~St�rke der Reflektion)
+		int maxFrontSensorValue = 2000;
+		int minLeftSensorValue = 1300;
+		int maxLeftSensorValue = 1700;
+
 		myThymio.setSpeed(cruiseSpeed, cruiseSpeed);
 		while (isRunning) {
 			int sensorOuterLeftValue = myThymio.getProxHorizontal().get(0);
-			System.out.println("LeftSensor"+sensorOuterLeftValue);
 			int sensorMidFrontValue = myThymio.getProxHorizontal().get(2);
-			System.out.println("MidSensor: "+sensorMidFrontValue);
-			boolean frontFree = sensorMidFrontValue < 2000;
-			System.out.println(sensorMidFrontValue < 2000);
-			
-			if (sensorOuterLeftValue < 1300 && frontFree) {
+			boolean frontIsFree = sensorMidFrontValue < maxFrontSensorValue;
+
+			if (sensorOuterLeftValue < minLeftSensorValue && frontIsFree) {
 				myThymio.setVRight(turnSpeed);
-			} else if (sensorOuterLeftValue > 1700
-					&& frontFree) {
+			} else if (sensorOuterLeftValue > maxLeftSensorValue && frontIsFree) {
 				myThymio.setVLeft(turnSpeed);
-			} else if (frontFree) {
+			} else if (frontIsFree) {
 				myThymio.setSpeed(cruiseSpeed, cruiseSpeed);
 			} else {
 				myThymio.stopThymio();
 				isRunning = false;
 			}
-		}*/
-		
-		//Aufgabe 2 (Cruise Control)
+		}
+
+		// Aufgabe 2 (Cruise Control)
 	}
 
 	public static void main(String[] args) {
