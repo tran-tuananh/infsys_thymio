@@ -29,7 +29,7 @@ public class MainController {
 		 * Aufgabe 1 (Abstand halten!)
 		 */
 
-		boolean isRunning = true;
+		
 		short turnSpeed = 250;
 		short cruiseSpeed = 200;
 
@@ -41,7 +41,7 @@ public class MainController {
 		int maxLeftSensorValue = 1700;
 
 		myThymio.setSpeed(cruiseSpeed, cruiseSpeed);
-		while (isRunning) {
+		while (true) {
 			int sensorOuterLeftValue = myThymio.getProxHorizontal().get(0);
 			int sensorMidFrontValue = myThymio.getProxHorizontal().get(2);
 			boolean frontIsFree = sensorMidFrontValue < maxFrontSensorValue;
@@ -50,11 +50,11 @@ public class MainController {
 				myThymio.setVRight(turnSpeed);
 			} else if (sensorOuterLeftValue > maxLeftSensorValue && frontIsFree) {
 				myThymio.setVLeft(turnSpeed);
-			} else if (frontIsFree) {
+			} else if (frontIsFree && sensorOuterLeftValue < maxFrontSensorValue && sensorOuterLeftValue > minLeftSensorValue) {
 				myThymio.setSpeed(cruiseSpeed, cruiseSpeed);
 			} else {
 				myThymio.stopThymio();
-				isRunning = false;
+				
 			}
 		}
 
