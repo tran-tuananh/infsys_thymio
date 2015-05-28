@@ -25,23 +25,25 @@ public class MainController {
 		 * für das Auführen jeweils ein Programm "auskommentieren"
 		 */
 
+		// Aufgabe 1 (Abstand halten!)
+		 
 		/*
-		 * Aufgabe 1 (Abstand halten!)
-		 */
 
-		/*boolean isRunning = true;
+		boolean isRunning = true;
+
 		short turnSpeed = 250;
 		short cruiseSpeed = 200;
 
 		// Objekte nah am Sensor -> hoher Wert, Objekte weiter weg -> kleiner
 		// Wert
 		// (~St�rke der Reflektion) 
-		/*int maxFrontSensorValue = 2000;
+		
+		int maxFrontSensorValue = 2000;
 		int minLeftSensorValue = 1300;
 		int maxLeftSensorValue = 1700;
 
 		myThymio.setSpeed(cruiseSpeed, cruiseSpeed);
-		while (isRunning) {
+		while (true) {
 			int sensorOuterLeftValue = myThymio.getProxHorizontal().get(0);
 			int sensorMidFrontValue = myThymio.getProxHorizontal().get(2);
 			boolean frontIsFree = sensorMidFrontValue < maxFrontSensorValue;
@@ -50,14 +52,16 @@ public class MainController {
 				myThymio.setVRight(turnSpeed);
 			} else if (sensorOuterLeftValue > maxLeftSensorValue && frontIsFree) {
 				myThymio.setVLeft(turnSpeed);
-			} else if (frontIsFree) {
+			} else if (frontIsFree && sensorOuterLeftValue < maxFrontSensorValue && sensorOuterLeftValue > minLeftSensorValue) {
 				myThymio.setSpeed(cruiseSpeed, cruiseSpeed);
 			} else {
 				myThymio.stopThymio();
-				isRunning = false;
+				
 			}
 		}
+		
 		*/
+		
 		// Aufgabe 2 (Cruise Control)
 		
 		boolean isRunning = true;
@@ -77,8 +81,6 @@ public class MainController {
 			if (frontIsFree) {
 				myThymio.setSpeed(adaptiveCruiseSpeed, adaptiveCruiseSpeed);
 				
-			// Decrease/Increase speed on the scale 0-100%; on the sensor range from 2000 to 3500
-			//	depending on how close thymio is to the obstacle 
 			}  else if (currentDistanceMidSensor > velocityScaleMin) {
 				
 				if (currentDistanceMidSensor >= velocityScaleMax) {
@@ -87,8 +89,9 @@ public class MainController {
 					
 				} else {
 					
+				// Decrease/Increase speed on the scale 0-100%; on the sensor range from 2000 to 3500
+				//	depending on how close thymio is to the obstacle 	
 				double newSpeed = (1 - (Math.abs(velocityScaleMin - currentDistanceMidSensor) / 1500)) * (double)adaptiveCruiseSpeed;
-				System.out.println("Cruise speed: " + newSpeed);
 	
 				myThymio.setSpeed((short)newSpeed, (short)newSpeed);
 				
