@@ -25,7 +25,7 @@ public class MainController {
 
 	public void run() {
 		// Datei umbenennen
-		File csv = new File("ecke.csv");
+		File csv = new File("kante.csv");
 		FileWriter fw;
 		try {
 			fw = new FileWriter(csv);

@@ -93,13 +93,39 @@ public class DataCalc {
 		}
 
 		// Berechnung Winkel
-		Double[] eckeLeftQuantile = { 2.0, 3.0, 3.0, 3.0, 3.0 };
-		Double[] eckeRightQuantile = { 77.00, 80.00, 81.00, 82.00, 84.00 };
-		Double[] kanteLeftQuantile = { 82.0, 82.0, 82.0, 82.0, 82.0 };
-		Double[] kanteRightQuantile = { 82.0, 82.0, 82.0, 82.0, 82.0 };
-		Double[] frontalLeftQuantile = { 49.00, 49.00, 49.00, 50.00, 50.00 };
-		Double[] frontalRightQuantile = { 45.00, 46.00, 46.00, 46.00, 46.00 };
+		/*
+		 * aus Beispiel csv 
+		 * Double[] eckeLeftQuantile = { 2.0, 3.0, 3.0, 3.0, 3.0 };
+		 * Double[] eckeRightQuantile = { 77.00, 80.00, 81.00, 82.00, 84.00 };
+		 * Double[] kanteLeftQuantile = { 82.0, 82.0, 82.0, 82.0, 82.0};
+		 * Double[] kanteRightQuantile = { 82.0, 82.0, 82.0, 82.0, 82.0 };
+		 * Double[] frontalLeftQuantile = { 49.00, 49.00, 49.00, 50.00, 50.00 };
+		 * Double[] frontalRightQuantile = { 45.00, 46.00, 46.00, 46.00, 46.00};
+		 */
 
+		/*
+		 * Thymio wurde während der Messung bewegt - größere Streuung der Werte;
+		 * Minima bei Kante: sehr klein, weil Sensoren zu schwach und liefern in
+		 * einem sehr kleinen Winkel Werte für alle drei Frontsensoren In den
+		 * meisten Fällen ist nur der Frontale und eins von
+		 * Linksfrontal/Rechtsfrontal zu messen
+		 * Double[] eckeLeftQuantile = {12.00, 23.00, 31.00, 34.00, 68.00 };
+		 * Double[] eckeRightQuantile = {0.000, 2.000, 6.000, 10.000, 27.0000 };
+		 * Double[] kanteLeftQuantile = { 1.00, 1.00, 70.00, 90.00, 90.00 };
+		 * Double[] kanteRightQuantile = {1.00, 1.00, 70.00, 90.00, 90.00 };
+		 * Double[] frontalLeftQuantile = {51.00, 51.00, 51.00, 51.00, 65.00 };
+		 * Double[] frontalRightQuantile ={ 62.00, 62.00, 63.00, 64.00, 65.00 };
+		 */
+		
+		/*
+		 * Idealbedingungen: Thymio stand still, gute Ausleuchtung, "ideale" Ausrichtung zu Hindernissen
+		 */
+		Double[] eckeLeftQuantile = { 19.00, 20.00, 20.00, 20.00, 21.00 };
+		Double[] eckeRightQuantile = { 4.000, 5.000, 5.000, 5.000, 6.000 };
+		Double[] kanteLeftQuantile = { 5.0, 5.0, 5.0, 5.0, 5.0 };
+		Double[] kanteRightQuantile = { 5.0, 5.0, 5.0, 5.0, 5.0 };
+		Double[] frontalLeftQuantile = { 53.0, 53.0, 53.0, 53.0, 53.0 };
+		Double[] frontalRightQuantile = { 68.00, 69.00, 69.00, 69.00, 69.00 };
 		switch (id) {
 		case "ECKE":
 			for (int i = 0; i < eckeLeftQuantile.length - 1; i++) {
